@@ -2,7 +2,7 @@ module.exports = {
   apps : [
     {
       name      : 'API',
-      script    : 'pm2 start index.js --name "eatat"',
+      script    : 'index.js',
       env: {
         COMMON_VARIABLE: 'true'
       },
