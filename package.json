@@ -1,0 +1,11 @@
+{
+  "name": "eatat-msgbot",
+  "version": "1.0.0",
+  "description": "A messenger bot for finding eating places nearby location ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kienphan",
+  "license": "ISC"
+}
