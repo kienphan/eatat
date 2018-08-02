@@ -1,7 +1,7 @@
 module.exports = {
   apps : [
     {
-      name      : 'API',
+      name      : 'eatat',
       script    : 'index.js',
       env: {
         COMMON_VARIABLE: 'true'
