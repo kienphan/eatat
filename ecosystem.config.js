@@ -2,7 +2,7 @@ module.exports = {
   apps : [
     {
       name      : 'API',
-      script    : 'pm2 start index.js',
+      script    : 'pm2 start index.js --name "eatat"',
       env: {
         COMMON_VARIABLE: 'true'
       },
@@ -18,7 +18,7 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'git@github.com:kienphan/eatat.git',
       path : '/root/eatat-msgbot',
-      'post-deploy' : 'nvm use --lts && npm install && pm2 reload ecosystem.config.js --env production && pm2 restart all'
+      'post-deploy' : 'nvm use --lts && npm install && pm2 reload ecosystem.config.js --env production && pm2 restart eatat'
     },
     // dev : {
     //   user : 'node',
