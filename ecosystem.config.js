@@ -18,7 +18,7 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'git@github.com:kienphan/eatat.git',
       path : '/root/eatat-msgbot',
-      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production && pm2 restart all'
+      'post-deploy' : 'nvm use --lts && npm install && pm2 reload ecosystem.config.js --env production && pm2 restart all'
     },
     // dev : {
     //   user : 'node',
