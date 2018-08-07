@@ -73,8 +73,6 @@ app.get('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
   let response;
 
-  console.log(received_message.quick_reply)
-
   if (received_message.text && !received_message.quick_reply) {
     switch(received_message.text) {
       case '/start': 
@@ -96,7 +94,6 @@ function handleMessage(sender_psid, received_message) {
     callSendAPI(sender_psid, response);
   } else if (received_message.attachments) {
     if (received_message.attachments[0].payload.coordinates) {
-      console.log('location sent!')
       lat = received_message.attachments[0].payload.coordinates.lat;
       long = received_message.attachments[0].payload.coordinates.long;
       response = {
@@ -133,8 +130,6 @@ function handleMessage(sender_psid, received_message) {
     callSendAPI(sender_psid, response);
   } else if (received_message.quick_reply) {
     let payload = received_message.quick_reply.payload;
-    console.log('Payload: ', received_message.quick_reply.payload);
-    console.log('Payload: ', payload);
     console.log("received quick reply!");
     response = {
       "text": "Phạm vi tìm kiếm bao nhiêu mầy (1km đổ xuống thôi nha, tao mệt lắm) ?",
@@ -248,21 +243,22 @@ function findRecommendedPlace (sender_psid, lat, long, type, radius, page) {
       console.error('Error: ' + err);
     } else {
       let listElements = [];
-      console.log(body.response)
-      let results = body.response.groups[0].items;
+      let resObj = JSON.parse(body);
+      let results = resObj.response.groups[0].items;
       if (results.length > 0) {
         results.forEach(item => {
+          // let imgUrl = item.venue.categories.icon.prefix + 100 + item.venue.categories.icon.suffix
           let element = {
             title: item.venue.name,
-            subtitle: item.venue.postalCode + item.venue.location.address + item.venue.contact.phone,
-            image_url: item.venue.categories.icon.prefix + 100 + item.venue.categories.icon.suffix,
+            subtitle: item.venue.postalCode + ' ' + item.venue.location.address,
+            // image_url: item.venue.categories.icon.prefix + 100 + item.venue.categories.icon.suffix,
             buttons: [
               {
                 title: "Xem",
                 type: "web_url",
                 url: item.venue.url,
                 messenger_extensions: true,
-                webview_height_ratio: full,
+                webview_height_ratio: 'full',
                 fallback_url: item.venue.url
               }
             ]
